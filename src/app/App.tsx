@@ -984,196 +984,196 @@ function Projects() {
 
 // ─── LeetCode ─────────────────────────────────────────────────────────────────
 
-interface LC { easy: number; medium: number; hard: number; total: number; rank: string; streak: number; acceptanceRate: string }
-const LC_DEFAULT: LC = { easy: 124, medium: 89, hard: 31, total: 244, rank: "Top 12%", streak: 47, acceptanceRate: "68.4%" };
-const LC_USERNAME = "ankur_gupta17";
-const LC_PROFILE_URL = "https://leetcode.com/u/ankur_gupta17/";
+// interface LC { easy: number; medium: number; hard: number; total: number; rank: string; streak: number; acceptanceRate: string }
+// const LC_DEFAULT: LC = { easy: 124, medium: 89, hard: 31, total: 244, rank: "Top 12%", streak: 47, acceptanceRate: "68.4%" };
+// const LC_USERNAME = "ankur_gupta17";
+// const LC_PROFILE_URL = "https://leetcode.com/u/ankur_gupta17/";
 
-function LeetcodeSection() {
-  const [stats, setStats] = useState<LC>(LC_DEFAULT);
-  const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState<LC>(LC_DEFAULT);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<SVGCircleElement>(null);
-  const wildFired = useRef(false);
-  const [wildToast, setWildToast] = useState<string | null>(null);
+// function LeetcodeSection() {
+//   const [stats, setStats] = useState<LC>(LC_DEFAULT);
+//   const [editing, setEditing] = useState(false);
+//   const [draft, setDraft] = useState<LC>(LC_DEFAULT);
+//   const sectionRef = useRef<HTMLDivElement>(null);
+//   const ringRef = useRef<SVGCircleElement>(null);
+//   const wildFired = useRef(false);
+//   const [wildToast, setWildToast] = useState<string | null>(null);
 
-  useEffect(() => {
-    gsap.from(sectionRef.current?.querySelectorAll(".lc-block") ?? [], {
-      scale: 0.88, opacity: 0, duration: 0.55, stagger: 0.08, ease: "back.out(1.7)",
-      scrollTrigger: { trigger: sectionRef.current, start: "top 78%" },
-    });
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && !wildFired.current) {
-        wildFired.current = true;
-        setWildToast("LeetCode Boss");
-      }
-    }, { threshold: 0.2 });
-    if (sectionRef.current) obs.observe(sectionRef.current);
-    return () => obs.disconnect();
-  }, []);
+//   useEffect(() => {
+//     gsap.from(sectionRef.current?.querySelectorAll(".lc-block") ?? [], {
+//       scale: 0.88, opacity: 0, duration: 0.55, stagger: 0.08, ease: "back.out(1.7)",
+//       scrollTrigger: { trigger: sectionRef.current, start: "top 78%" },
+//     });
+//     const obs = new IntersectionObserver(([e]) => {
+//       if (e.isIntersecting && !wildFired.current) {
+//         wildFired.current = true;
+//         setWildToast("LeetCode Boss");
+//       }
+//     }, { threshold: 0.2 });
+//     if (sectionRef.current) obs.observe(sectionRef.current);
+//     return () => obs.disconnect();
+//   }, []);
 
-  useEffect(() => {
-    if (!ringRef.current) return;
-    const pct = Math.min(stats.total / 500, 1);
-    const circum = 2 * Math.PI * 54;
-    animeRun(ringRef.current, { strokeDashoffset: [circum, circum * (1 - pct)], duration: 1600, ease: "outExpo" });
-  }, [stats]);
+//   useEffect(() => {
+//     if (!ringRef.current) return;
+//     const pct = Math.min(stats.total / 500, 1);
+//     const circum = 2 * Math.PI * 54;
+//     animeRun(ringRef.current, { strokeDashoffset: [circum, circum * (1 - pct)], duration: 1600, ease: "outExpo" });
+//   }, [stats]);
 
-  const circum = 2 * Math.PI * 54;
+//   const circum = 2 * Math.PI * 54;
 
-  return (
-    <section id="leetcode" ref={sectionRef} className="relative z-10 py-24 px-6 max-w-6xl mx-auto">
-      {wildToast && <WildToast name={wildToast} onDone={() => setWildToast(null)} />}
+//   return (
+//     <section id="leetcode" ref={sectionRef} className="relative z-10 py-24 px-6 max-w-6xl mx-auto">
+//       {wildToast && <WildToast name={wildToast} onDone={() => setWildToast(null)} />}
 
-      <div className="mb-12">
-        <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.5rem", color: "#ff2d55", marginBottom: "8px", letterSpacing: "0.2em" }}>// BATTLE_RECORD</div>
-        <h2 style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "clamp(1rem,2.5vw,1.6rem)", color: "#e8e8f0", lineHeight: 1.5, marginBottom: "6px" }}>
-          LEETCODE ARENA
-        </h2>
-        <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: "#7a7a9a" }}>
-          Daily battles · competitive rankings · streak maintained
-        </p>
-        <div className="mt-4 flex items-center gap-2">
-          <div style={{ height: "1px", width: "48px", background: "#ff2d55" }} />
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
-          <Pokeball size={16} />
-        </div>
-      </div>
+//       <div className="mb-12">
+//         <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.5rem", color: "#ff2d55", marginBottom: "8px", letterSpacing: "0.2em" }}>// BATTLE_RECORD</div>
+//         <h2 style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "clamp(1rem,2.5vw,1.6rem)", color: "#e8e8f0", lineHeight: 1.5, marginBottom: "6px" }}>
+//           LEETCODE ARENA
+//         </h2>
+//         <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: "#7a7a9a" }}>
+//           Daily battles · competitive rankings · streak maintained
+//         </p>
+//         <div className="mt-4 flex items-center gap-2">
+//           <div style={{ height: "1px", width: "48px", background: "#ff2d55" }} />
+//           <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
+//           <Pokeball size={16} />
+//         </div>
+//       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        {/* Ring card */}
-        <PixelBox color="#ffd32a44" className="lc-block p-8 flex flex-col items-center justify-center text-center">
-          <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.4rem", color: "#7a7a9a", marginBottom: "16px", letterSpacing: "0.15em" }}>TRAINER HP</div>
-          <div className="relative w-36 h-36 mb-5">
-            <svg viewBox="0 0 120 120" className="w-full h-full -rotate-90">
-              <circle cx="60" cy="60" r="54" fill="none" stroke="#1a1a2e" strokeWidth="10" />
-              <circle ref={ringRef} cx="60" cy="60" r="54" fill="none" stroke="#ffd32a" strokeWidth="10"
-                strokeLinecap="round" strokeDasharray={circum} strokeDashoffset={circum} />
-            </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "1.4rem", color: "#ffd32a" }}>{stats.total}</span>
-              <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.38rem", color: "#7a7a9a", marginTop: "4px" }}>SOLVED</span>
-            </div>
-          </div>
-          <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.7rem", color: "#e8e8f0", marginBottom: "2px" }}>{stats.rank}</div>
-          <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.38rem", color: "#7a7a9a" }}>GLOBAL RANK</div>
-          <div className="mt-4 flex items-center gap-1.5" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "#ffd32a" }}>
-            <Pokeball size={14} />
-            <span>@{LC_USERNAME}</span>
-          </div>
-          <div className="mt-5 grid grid-cols-2 gap-3 w-full">
-            {[
-              { label: "STREAK", v: `${stats.streak}D`, col: "#00d4aa" },
-              { label: "ACC", v: stats.acceptanceRate, col: "#ff4757" },
-            ].map((s) => (
-              <div key={s.label} style={{ background: "#0d0d18", border: `1px solid ${s.col}44`, padding: "8px" }}>
-                <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.65rem", color: s.col, marginBottom: "4px" }}>{s.v}</div>
-                <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.35rem", color: "#7a7a9a" }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
-          <a href={LC_PROFILE_URL} target="_blank" rel="noreferrer"
-            className="mt-4 w-full py-2.5 text-center transition-all duration-150 hover:-translate-y-0.5"
-            style={{ background: "#ffd32a", color: "#0a0a0f", fontFamily: "'Press Start 2P', monospace", fontSize: "0.42rem", boxShadow: "3px 3px 0 #7a6410", letterSpacing: "0.05em" }}>
-            ► VIEW PROFILE
-          </a>
-        </PixelBox>
+//       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+//         {/* Ring card */}
+//         <PixelBox color="#ffd32a44" className="lc-block p-8 flex flex-col items-center justify-center text-center">
+//           <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.4rem", color: "#7a7a9a", marginBottom: "16px", letterSpacing: "0.15em" }}>TRAINER HP</div>
+//           <div className="relative w-36 h-36 mb-5">
+//             <svg viewBox="0 0 120 120" className="w-full h-full -rotate-90">
+//               <circle cx="60" cy="60" r="54" fill="none" stroke="#1a1a2e" strokeWidth="10" />
+//               <circle ref={ringRef} cx="60" cy="60" r="54" fill="none" stroke="#ffd32a" strokeWidth="10"
+//                 strokeLinecap="round" strokeDasharray={circum} strokeDashoffset={circum} />
+//             </svg>
+//             <div className="absolute inset-0 flex flex-col items-center justify-center">
+//               <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "1.4rem", color: "#ffd32a" }}>{stats.total}</span>
+//               <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.38rem", color: "#7a7a9a", marginTop: "4px" }}>SOLVED</span>
+//             </div>
+//           </div>
+//           <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.7rem", color: "#e8e8f0", marginBottom: "2px" }}>{stats.rank}</div>
+//           <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.38rem", color: "#7a7a9a" }}>GLOBAL RANK</div>
+//           <div className="mt-4 flex items-center gap-1.5" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "#ffd32a" }}>
+//             <Pokeball size={14} />
+//             <span>@{LC_USERNAME}</span>
+//           </div>
+//           <div className="mt-5 grid grid-cols-2 gap-3 w-full">
+//             {[
+//               { label: "STREAK", v: `${stats.streak}D`, col: "#00d4aa" },
+//               { label: "ACC", v: stats.acceptanceRate, col: "#ff4757" },
+//             ].map((s) => (
+//               <div key={s.label} style={{ background: "#0d0d18", border: `1px solid ${s.col}44`, padding: "8px" }}>
+//                 <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.65rem", color: s.col, marginBottom: "4px" }}>{s.v}</div>
+//                 <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.35rem", color: "#7a7a9a" }}>{s.label}</div>
+//               </div>
+//             ))}
+//           </div>
+//           <a href={LC_PROFILE_URL} target="_blank" rel="noreferrer"
+//             className="mt-4 w-full py-2.5 text-center transition-all duration-150 hover:-translate-y-0.5"
+//             style={{ background: "#ffd32a", color: "#0a0a0f", fontFamily: "'Press Start 2P', monospace", fontSize: "0.42rem", boxShadow: "3px 3px 0 #7a6410", letterSpacing: "0.05em" }}>
+//             ► VIEW PROFILE
+//           </a>
+//         </PixelBox>
 
-        {/* Tier breakdown */}
-        <div className="lc-block lg:col-span-2 space-y-4">
-          {[
-            { label: "EASY",   count: stats.easy,   col: "#00d4aa", max: 200, type: "GRASS" as const },
-            { label: "MEDIUM", count: stats.medium, col: "#ffd32a", max: 150, type: "ELECTRIC" as const },
-            { label: "HARD",   count: stats.hard,   col: "#ff4757", max: 100, type: "FIRE" as const },
-          ].map((tier) => (
-            <PixelBox key={tier.label} color={`${tier.col}44`} className="p-5">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <TypeBadge type={tier.type} />
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "#7a7a9a" }}>
-                    {tier.count} / {tier.max} DEFEATED
-                  </span>
-                </div>
-                <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.5rem", color: tier.col }}>
-                  {Math.round((tier.count / tier.max) * 100)}%
-                </span>
-              </div>
-              {/* HP-style bar */}
-              <div className="flex items-center gap-2">
-                <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.38rem", color: "#7a7a9a" }}>HP</span>
-                <div className="flex-1 h-3 bg-[#0d0d18] overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
-                  <div style={{
-                    width: `${Math.min((tier.count / tier.max) * 100, 100)}%`, height: "100%",
-                    background: `linear-gradient(90deg,${tier.col}77,${tier.col})`,
-                    transition: "width 1s ease",
-                  }} />
-                </div>
-              </div>
-              {/* Pixel bar */}
-              <div className="mt-2" style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.42rem", letterSpacing: "1px" }}>
-                <span style={{ color: tier.col }}>{"█".repeat(Math.floor((tier.count / tier.max) * 15))}</span>
-                <span style={{ color: "#1a1a2e" }}>{"█".repeat(15 - Math.floor((tier.count / tier.max) * 15))}</span>
-              </div>
-            </PixelBox>
-          ))}
+//         {/* Tier breakdown */}
+//         <div className="lc-block lg:col-span-2 space-y-4">
+//           {[
+//             { label: "EASY",   count: stats.easy,   col: "#00d4aa", max: 200, type: "GRASS" as const },
+//             { label: "MEDIUM", count: stats.medium, col: "#ffd32a", max: 150, type: "ELECTRIC" as const },
+//             { label: "HARD",   count: stats.hard,   col: "#ff4757", max: 100, type: "FIRE" as const },
+//           ].map((tier) => (
+//             <PixelBox key={tier.label} color={`${tier.col}44`} className="p-5">
+//               <div className="flex items-center justify-between mb-4">
+//                 <div className="flex items-center gap-3">
+//                   <TypeBadge type={tier.type} />
+//                   <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "#7a7a9a" }}>
+//                     {tier.count} / {tier.max} DEFEATED
+//                   </span>
+//                 </div>
+//                 <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.5rem", color: tier.col }}>
+//                   {Math.round((tier.count / tier.max) * 100)}%
+//                 </span>
+//               </div>
+//               {/* HP-style bar */}
+//               <div className="flex items-center gap-2">
+//                 <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.38rem", color: "#7a7a9a" }}>HP</span>
+//                 <div className="flex-1 h-3 bg-[#0d0d18] overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
+//                   <div style={{
+//                     width: `${Math.min((tier.count / tier.max) * 100, 100)}%`, height: "100%",
+//                     background: `linear-gradient(90deg,${tier.col}77,${tier.col})`,
+//                     transition: "width 1s ease",
+//                   }} />
+//                 </div>
+//               </div>
+//               {/* Pixel bar */}
+//               <div className="mt-2" style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.42rem", letterSpacing: "1px" }}>
+//                 <span style={{ color: tier.col }}>{"█".repeat(Math.floor((tier.count / tier.max) * 15))}</span>
+//                 <span style={{ color: "#1a1a2e" }}>{"█".repeat(15 - Math.floor((tier.count / tier.max) * 15))}</span>
+//               </div>
+//             </PixelBox>
+//           ))}
 
-          <button onClick={() => { setDraft(stats); setEditing(true); }}
-            className="w-full py-4 transition-all duration-150 hover:-translate-y-0.5"
-            style={{
-              background: "transparent", border: "2px dashed rgba(255,255,255,0.12)",
-              fontFamily: "'Press Start 2P', monospace", fontSize: "0.45rem",
-              color: "#7a7a9a", cursor: "pointer", boxShadow: "none",
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#ff2d55"; e.currentTarget.style.color = "#ff2d55"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; e.currentTarget.style.color = "#7a7a9a"; }}>
-            ► PASTE YOUR LEETCODE STATS
-          </button>
-        </div>
-      </div>
+//           <button onClick={() => { setDraft(stats); setEditing(true); }}
+//             className="w-full py-4 transition-all duration-150 hover:-translate-y-0.5"
+//             style={{
+//               background: "transparent", border: "2px dashed rgba(255,255,255,0.12)",
+//               fontFamily: "'Press Start 2P', monospace", fontSize: "0.45rem",
+//               color: "#7a7a9a", cursor: "pointer", boxShadow: "none",
+//             }}
+//             onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#ff2d55"; e.currentTarget.style.color = "#ff2d55"; }}
+//             onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; e.currentTarget.style.color = "#7a7a9a"; }}>
+//             ► PASTE YOUR LEETCODE STATS
+//           </button>
+//         </div>
+//       </div>
 
-      {/* Edit modal */}
-      {editing && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center" style={{ background: "rgba(0,0,0,0.88)", backdropFilter: "blur(10px)" }}>
-          <PixelBox color="#ff2d55" className="w-full max-w-md p-8">
-            <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.55rem", color: "#ff2d55", marginBottom: "20px" }}>
-              UPDATE BATTLE STATS
-            </div>
-            <div className="space-y-4">
-              {(Object.keys(draft) as (keyof LC)[]).map((key) => (
-                <div key={key}>
-                  <label style={{ display: "block", fontFamily: "'Press Start 2P', monospace", fontSize: "0.38rem", color: "#7a7a9a", marginBottom: "6px" }}>
-                    {key.toUpperCase()}
-                  </label>
-                  <input
-                    type={typeof draft[key] === "number" ? "number" : "text"}
-                    value={draft[key]}
-                    onChange={(e) => setDraft((d) => ({ ...d, [key]: typeof d[key] === "number" ? Number(e.target.value) : e.target.value }))}
-                    style={{
-                      width: "100%", padding: "8px 12px",
-                      background: "#0d0d18", border: "1px solid rgba(255,255,255,0.1)",
-                      color: "#e8e8f0", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", outline: "none",
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="flex gap-3 mt-6">
-              <button onClick={() => { setStats(draft); setEditing(false); }}
-                style={{ flex: 1, padding: "10px", background: "#ff2d55", color: "#fff", fontFamily: "'Press Start 2P', monospace", fontSize: "0.45rem", border: "none", cursor: "pointer", boxShadow: "3px 3px 0 #991b2e" }}>
-                SAVE
-              </button>
-              <button onClick={() => setEditing(false)}
-                style={{ flex: 1, padding: "10px", background: "transparent", color: "#7a7a9a", fontFamily: "'Press Start 2P', monospace", fontSize: "0.45rem", border: "1px solid rgba(255,255,255,0.15)", cursor: "pointer" }}>
-                CANCEL
-              </button>
-            </div>
-          </PixelBox>
-        </div>
-      )}
-    </section>
-  );
-}
+//       {/* Edit modal */}
+//       {editing && (
+//         <div className="fixed inset-0 z-[100] flex items-center justify-center" style={{ background: "rgba(0,0,0,0.88)", backdropFilter: "blur(10px)" }}>
+//           <PixelBox color="#ff2d55" className="w-full max-w-md p-8">
+//             <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "0.55rem", color: "#ff2d55", marginBottom: "20px" }}>
+//               UPDATE BATTLE STATS
+//             </div>
+//             <div className="space-y-4">
+//               {(Object.keys(draft) as (keyof LC)[]).map((key) => (
+//                 <div key={key}>
+//                   <label style={{ display: "block", fontFamily: "'Press Start 2P', monospace", fontSize: "0.38rem", color: "#7a7a9a", marginBottom: "6px" }}>
+//                     {key.toUpperCase()}
+//                   </label>
+//                   <input
+//                     type={typeof draft[key] === "number" ? "number" : "text"}
+//                     value={draft[key]}
+//                     onChange={(e) => setDraft((d) => ({ ...d, [key]: typeof d[key] === "number" ? Number(e.target.value) : e.target.value }))}
+//                     style={{
+//                       width: "100%", padding: "8px 12px",
+//                       background: "#0d0d18", border: "1px solid rgba(255,255,255,0.1)",
+//                       color: "#e8e8f0", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", outline: "none",
+//                     }}
+//                   />
+//                 </div>
+//               ))}
+//             </div>
+//             <div className="flex gap-3 mt-6">
+//               <button onClick={() => { setStats(draft); setEditing(false); }}
+//                 style={{ flex: 1, padding: "10px", background: "#ff2d55", color: "#fff", fontFamily: "'Press Start 2P', monospace", fontSize: "0.45rem", border: "none", cursor: "pointer", boxShadow: "3px 3px 0 #991b2e" }}>
+//                 SAVE
+//               </button>
+//               <button onClick={() => setEditing(false)}
+//                 style={{ flex: 1, padding: "10px", background: "transparent", color: "#7a7a9a", fontFamily: "'Press Start 2P', monospace", fontSize: "0.45rem", border: "1px solid rgba(255,255,255,0.15)", cursor: "pointer" }}>
+//                 CANCEL
+//               </button>
+//             </div>
+//           </PixelBox>
+//         </div>
+//       )}
+//     </section>
+//   );
+// }
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
 
