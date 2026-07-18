@@ -6,6 +6,8 @@ import { animate as animeRun } from "animejs";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const ENABLE_LEETCODE_SECTION = false;
+
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const SKILLS = [
@@ -568,7 +570,7 @@ function Nav({ active }: { active: string }) {
     { id: "hero",     label: "HOME" },
     { id: "skills",   label: "MOVES" },
     { id: "projects", label: "POKEDEX" },
-    { id: "leetcode", label: "BATTLES" },
+    ...(ENABLE_LEETCODE_SECTION ? [{ id: "leetcode", label: "BATTLES" }] : []),
     { id: "contact",  label: "LINKS" },
   ];
   return (
@@ -1261,7 +1263,7 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.classList.add("dark");
-    ["hero", "skills", "projects", "leetcode", "contact"].forEach((id) => {
+    ["hero", "skills", "projects", ...(ENABLE_LEETCODE_SECTION ? ["leetcode"] : []), "contact"].forEach((id) => {
       ScrollTrigger.create({
         trigger: `#${id}`, start: "top 55%", end: "bottom 55%",
         onEnter: () => setActive(id), onEnterBack: () => setActive(id),
@@ -1304,7 +1306,6 @@ export default function App() {
         <Hero />
         <Skills />
         <Projects />
-        <LeetcodeSection />
         <ContactSection />
       </main>
     </div>
